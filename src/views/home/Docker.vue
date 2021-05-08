@@ -1,9 +1,5 @@
 <template>
   <div class="docker">
-    <!-- <div class="docker__item docker__item--active">
-      <div class="iconfont">&#xe6f3;</div>
-      <div class="docker__title">首页</div>
-    </div> -->
 
     <div v-for="(item,index) in dockerList" :key="item.icon" :class="{'docker__item': true, 'docker__item--active': index===0}">
       <div class="iconfont" v-html="item.icon" />
@@ -30,7 +26,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '../../style/viriables.scss';
 
 .docker {

@@ -13,9 +13,9 @@ import Docker from './Docker'
 export default ({
   name: 'Home',
   components: {
-      StaticPart,
-      Nearby,
-      Docker
+    StaticPart,
+    Nearby,
+    Docker
   }
 })
 

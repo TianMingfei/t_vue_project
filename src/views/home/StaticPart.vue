@@ -14,45 +14,9 @@
 
       <div class="icons">
 
-        <div class="icons__items">
-          <img class="icons__items__img" src="http://www.dell-lee.com/imgs/vue3/超市.png" alt="">
-          <p class="icons__items__text">账号</p>
-        </div>
-        <div class="icons__items">
-          <img class="icons__items__img" src="http://www.dell-lee.com/imgs/vue3/菜市场.png" alt="">
-          <p class="icons__items__text">账号</p>
-        </div>
-        <div class="icons__items">
-          <img class="icons__items__img" src="http://www.dell-lee.com/imgs/vue3/水果店.png" alt="">
-          <p class="icons__items__text">账号</p>
-        </div>
-        <div class="icons__items">
-          <img class="icons__items__img" src="http://www.dell-lee.com/imgs/vue3/鲜花.png" alt="">
-          <p class="icons__items__text">账号</p>
-        </div>
-        <div class="icons__items">
-          <img class="icons__items__img" src="http://www.dell-lee.com/imgs/vue3/医药健康.png" alt="">
-          <p class="icons__items__text">账号</p>
-        </div>
-        <div class="icons__items">
-          <img class="icons__items__img" src="http://www.dell-lee.com/imgs/vue3/家居.png" alt="">
-          <p class="icons__items__text">账号</p>
-        </div>
-        <div class="icons__items">
-          <img class="icons__items__img" src="http://www.dell-lee.com/imgs/vue3/蛋糕.png" alt="">
-          <p class="icons__items__text">账号</p>
-        </div>
-        <div class="icons__items">
-          <img class="icons__items__img" src="http://www.dell-lee.com/imgs/vue3/签到.png" alt="">
-          <p class="icons__items__text">账号</p>
-        </div>
-        <div class="icons__items">
-          <img class="icons__items__img" src="http://www.dell-lee.com/imgs/vue3/大牌免运.png" alt="">
-          <p class="icons__items__text">账号</p>
-        </div>
-        <div class="icons__items">
-          <img class="icons__items__img" src="http://www.dell-lee.com/imgs/vue3/红包.png" alt="">
-          <p class="icons__items__text">账号</p>
+        <div class="icons__items" v-for="item in staticList" :key="item">
+          <img class="icons__items__img" :src='`http://www.dell-lee.com/imgs/vue3/${item}.png`' alt="">
+          <p class="icons__items__text">{{item}}</p>
         </div>
       </div>
       <div class="gap"></div>
@@ -60,11 +24,26 @@
 
 <script>
 export default {
-  name: 'StaticPart'
+  name: 'StaticPart',
+  setup () {
+    const staticList = [
+      '超市',
+      '菜市场',
+      '水果店',
+      '鲜花',
+      '医药健康',
+      '家居',
+      '蛋糕',
+      '签到',
+      '大牌免运',
+      '红包'
+    ]
+    return { staticList }
+  }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '../../style/viriables.scss';
 @import '../../style/mixins.scss';
 .position {

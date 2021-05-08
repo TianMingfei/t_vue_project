@@ -18,25 +18,19 @@
           </div>
         </div>
 
-        <div class="nearby__item">
+        <div class="nearby__item" v-for="item in nearbyList" :key="item.title">
           <img class="nearby__item__img" src="http://www.dell-lee.com/imgs/vue3/near.png" alt="">
           <div class="nearby__content">
             <div class="nearby__content__title">
-              山姆会员商店
+              {{item.title}}
             </div>
             <div class="nearby__content__tags">
-              <span class="nearby__content_tag">
-                月售1万加
-              </span>
-              <span class="nearby__content_tag">
-                月售1万加
-              </span>
-              <span class="nearby__content_tag">
-                月售1万加
+              <span class="nearby__content_tag" v-for="tag in item.tags" :key="tag">
+                {{tag}}
               </span>
             </div>
             <div class="nearby__content__highlight">
-              我是亮点我是亮点
+              {{item.desc}}
             </div>
           </div>
         </div>
@@ -46,7 +40,37 @@
 
 <script>
 export default {
-  name: 'Nearby'
+  name: 'Nearby',
+  setup () {
+    const nearbyList = [
+      {
+        title: '沃尔玛',
+        tags: ['月收一万', '起送0元', '基础运费100'],
+        desc: 'VIP尊享免运费'
+      },
+      {
+        title: '沃尔玛',
+        tags: ['月收一万', '起送0元', '基础运费100'],
+        desc: 'VIP尊享免运费'
+      },
+      {
+        title: '沃尔玛',
+        tags: ['月收一万', '起送0元', '基础运费100'],
+        desc: 'VIP尊享免运费'
+      },
+      {
+        title: '沃尔玛',
+        tags: ['月收一万', '起送0元', '基础运费100'],
+        desc: 'VIP尊享免运费'
+      },
+      {
+        title: '沃尔玛',
+        tags: ['月收一万', '起送0元', '基础运费100'],
+        desc: 'VIP尊享免运费'
+      }
+    ]
+    return { nearbyList }
+  }
 }
 </script>
 
