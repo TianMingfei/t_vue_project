@@ -2,21 +2,67 @@
   <div class="wrapper">
     <img class="wrapper__img" src="http://www.dell-lee.com/imgs/vue3/user.png" alt="">
     <div class="wrapper__input">
-      <input class="wrapper__input__content" type="text" placeholder="请输入手机号">
+      <input v-model="data.username" class="wrapper__input__content" type="text" placeholder="请输入手机号">
     </div>
     <div class="wrapper__input">
-      <input class="wrapper__input__content" type="password" placeholder="请输入密码">
+      <input v-model="data.password" class="wrapper__input__content" type="password" placeholder="请输入密码">
     </div>
-    <div class="wrapper__login">登录</div>
-    <div class="wrapper__register">立即注册</div>
+    <div class="wrapper__login" @click="handleLogin">登录</div>
+    <div class="wrapper__register" @click="handleRegisterClick">立即注册</div>
+    <Toast v-if="showToast" :message="data.toastMessage"/>
   </div>
 </template>
 
 <script>
+import { useRouter } from 'vue-router'
+import axios from 'axios'
+import { reactive } from '@vue/reactivity'
+import { post } from '../../utils/request'
+import Toast from '../../components/Toast'
+
+axios.defaults.headers.post['Content-Type'] = 'application/json'
+
 export default ({
   name: 'Login',
+  components: {
+    Toast
+  },
   setup () {
-
+    const data = reactive({
+      username: '111',
+      password: '222',
+      showToast: false,
+      toastMessage: ''
+    })
+    const router = useRouter()
+    const handleLogin = async () => {
+      try {
+        const result = await post('/api/user/login', {
+          username: data.username,
+          password: data.password
+        })
+        if (result?.errno === 0) {
+          localStorage.isLogin = true
+          router.push({ name: 'Home' })
+        } else {
+          showToast('登录失败')
+        }
+      } catch {
+        showToast('请求失败')
+      }
+    }
+    const showToast = (message) => {
+      data.showToast = true
+      data.toastMessage = message
+      setTimeout(() => {
+        data.showToast = false
+        data.toastMessage = ''
+      }, 2000)
+    }
+    const handleRegisterClick = () => {
+      router.push({ name: 'Register' })
+    }
+    return { handleLogin, handleRegisterClick, data }
   }
 })
 </script>
