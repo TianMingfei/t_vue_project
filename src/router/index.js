@@ -46,12 +46,13 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  const { isLogin } = localStorage
   const { name } = to
   const isLoginOrRegister = (name === 'Login' || name === 'Register')
   if (isLoginOrRegister) {
     next()
   } else {
-    next({ name: 'Login' })
+    (isLogin || isLoginOrRegister) ? next() : next({ name: 'Login' })
   }
 })
 
