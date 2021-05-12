@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { reactive } from '@vue/reactivity'
+import { reactive, toRefs } from '@vue/reactivity'
 export default {
   props: [
     'message'
@@ -14,20 +14,22 @@ export default {
 
 export const userToastEffect = () => {
   const toastData = reactive({
-    showToast: false,
+    show: false,
     toastMessage: ''
   })
 
   const showToast = (message) => {
-    toastData.showToast = true
+    toastData.show = true
     toastData.toastMessage = message
     setTimeout(() => {
-      toastData.showToast = false
+      toastData.show = false
       toastData.toastMessage = ''
     }, 2000)
   }
 
-  return { showToast, toastData }
+  const { show, toastMessage } = toRefs(toastData)
+
+  return { showToast, show, toastMessage }
 }
 
 </script>
